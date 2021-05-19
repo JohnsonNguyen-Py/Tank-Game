@@ -4,14 +4,20 @@ import edu.csc413.tankgame.model.*;
 import edu.csc413.tankgame.view.*;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameDriver {
     private final MainView mainView;
     private final RunGameView runGameView;
+    private final List<Entity> entities;
+    private final GameWorld gameWorld; //NEED THIS TO RUN
 
     public GameDriver() {
         mainView = new MainView(this::startMenuActionPerformed);
         runGameView = mainView.getRunGameView();
+        entities = new ArrayList<>();
+        gameWorld = new GameWorld();
     }
 
     public void start() {
@@ -48,8 +54,54 @@ public class GameDriver {
      * setUpGame is called once at the beginning when the game is started. Entities that are present from the start
      * should be initialized here, with their corresponding sprites added to the RunGameView.
      */
-    private void setUpGame() {
+    private void setUpGame(){
         // TODO: Implement.
+        PlayerTank playerTank = new PlayerTank(
+                Constants.PLAYER_TANK_ID,
+                Constants.PLAYER_TANK_INITIAL_X,
+                Constants.PLAYER_TANK_INITIAL_Y,
+                Constants.PLAYER_TANK_INITIAL_ANGLE);
+        entities.add(playerTank);
+
+        runGameView.addSprite(
+                    playerTank.getId(),
+                    RunGameView.PLAYER_TANK_IMAGE_FILE,
+                    playerTank.getX(),
+                    playerTank.getY(),
+                    playerTank.getAngle() //FROM LECTURE THANK YOU THE GOAT DAWSON
+        );
+        gameWorld.addEntity(playerTank);
+
+        DumbAiTank aiTank = new DumbAiTank(
+                Constants.AI_TANK_1_ID,
+                Constants.AI_TANK_1_INITIAL_X,
+                Constants.AI_TANK_1_INITIAL_Y,
+                Constants.AI_TANK_1_INITIAL_ANGLE);
+        entities.add(aiTank);
+        runGameView.addSprite(
+                aiTank.getId(),
+                RunGameView.AI_TANK_IMAGE_FILE,
+                aiTank.getX(),
+                aiTank.getY(),
+                aiTank.getAngle()
+        );
+        gameWorld.addEntity(aiTank);
+
+        aiTankTwo aiTankTwo = new aiTankTwo(
+                Constants.AI_TANK_2_ID,
+                Constants.AI_TANK_2_INITIAL_X,
+                Constants.AI_TANK_2_INITIAL_Y,
+                Constants.AI_TANK_2_INITIAL_ANGLE);
+        entities.add(aiTankTwo);
+        runGameView.addSprite(
+                aiTankTwo.getId(),
+                RunGameView.AI_TANK_IMAGE_FILE,
+                aiTankTwo.getX(),
+                aiTankTwo.getY(),
+                aiTankTwo.getAngle()
+        );
+        gameWorld.addEntity(aiTankTwo); //.ADD ENTITY CLEAN UP SOON
+
     }
 
     /**
@@ -59,6 +111,57 @@ public class GameDriver {
      */
     private boolean updateGame() {
         // TODO: Implement.
+        ArrayList<Entity> originalEntities = new ArrayList<>(gameWorld.getEntities()); //Dawson
+        for (Entity entity: originalEntities)
+        {
+            entity.move(gameWorld);
+        }
+
+        for (Entity entity: gameWorld.getShells())
+        {
+           runGameView.addSprite(
+                    entity.getId(),
+                   RunGameView.SHELL_IMAGE_FILE,
+                   entity.getX(),
+                   entity.getY(),
+                   entity.getAngle()
+           );
+            gameWorld.combineList(); //BORGES
+        }
+
+        if (gameWorld.getShells().size() > 0)// BORGES
+        {
+            gameWorld.clearShells();
+
+        }
+        for (Entity entity: gameWorld.getEntities())
+        {
+            runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
+        }
+
+        /* RAPID FIRE POWER UP
+        or (Entity entity: gameWorld.getShells())
+        {
+           runGameView.addSprite(
+                    entity.getId(),
+                   RunGameView.SHELL_IMAGE_FILE,
+                   entity.getX(),
+                   entity.getY(),
+                   entity.getAngle()
+           );
+            gameWorld.combineList(); //BORGES
+        }
+
+        if (gameWorld.getShells().size() > 0)
+        {
+            gameWorld.clearShells();
+
+        }
+        for (Entity entity: gameWorld.getEntities())
+        {
+            runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
+        }
+         */
         return true;
     }
 

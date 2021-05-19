@@ -6,53 +6,32 @@ import edu.csc413.tankgame.Constants;
 public abstract class Tank extends Entity {
     // TODO: Implement. A lot of what's below is relevant to all Entity types, not just Tanks. Move it accordingly to
     //       Entity class.
-    private String id;
-    private double x;
-    private double y;
-    private double angle;
 
     public Tank(String id, double x, double y, double angle) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.angle = angle;
-    }
+        super(id, x, y, angle);
 
-    public String getId() {
-        return id;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getAngle() {
-        return angle;
     }
 
     // TODO: The methods below are provided so you don't have to do the math for movement. You should call these methods
     //       from the various subclasses of Entity in their implementations of move.
 
+
     protected void moveForward(double movementSpeed) {
-        x += movementSpeed * Math.cos(angle);
-        y += movementSpeed * Math.sin(angle);
+        setX(getX() + movementSpeed * Math.cos(getAngle()));
+        setY(getY() + movementSpeed * Math.sin(getAngle()));
     }
 
     protected void moveBackward(double movementSpeed) {
-        x -= movementSpeed * Math.cos(angle);
-        y -= movementSpeed * Math.sin(angle);
+        setX(getX() - movementSpeed * Math.cos(getAngle()));
+        setY(getY() - movementSpeed * Math.sin(getAngle()));
     }
 
     protected void turnLeft(double turnSpeed) {
-        angle -= turnSpeed;
+        setAngle(getAngle() - turnSpeed);
     }
 
     protected void turnRight(double turnSpeed) {
-        angle += turnSpeed;
+        setAngle(getAngle() + turnSpeed);
     }
 
     // The following methods will be useful for determining where a shell should be spawned when it
