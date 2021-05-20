@@ -11,7 +11,7 @@ public class aiTankTwo extends Tank{
         @Override
         public void move(GameWorld gameWorld) {
             Entity playerTank = gameWorld.getEntity(Constants.PLAYER_TANK_ID);
-
+            fire(gameWorld);
 
         }
 }

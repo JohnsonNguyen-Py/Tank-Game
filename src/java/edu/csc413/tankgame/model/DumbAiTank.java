@@ -13,6 +13,7 @@ public class DumbAiTank extends Tank {
     public void move(GameWorld gameWorld) {
         moveForward(Constants.TANK_MOVEMENT_SPEED);
         turnLeft(Constants.TANK_TURN_SPEED);
+        fire(gameWorld);
 
 
     }

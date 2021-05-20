@@ -12,6 +12,7 @@ public class GameDriver {
     private final RunGameView runGameView;
     private final List<Entity> entities;
     private final GameWorld gameWorld; //NEED THIS TO RUN
+    private int wallNum =0;
 
     public GameDriver() {
         mainView = new MainView(this::startMenuActionPerformed);
@@ -56,6 +57,23 @@ public class GameDriver {
      */
     private void setUpGame(){
         // TODO: Implement.
+
+        for (WallInformation wall: WallInformation.readWalls())
+        {
+            Wall addWall = new Wall(
+                    "Wall" + wallNum,wall.getX(),wall.getY()
+            );
+            wallNum++;
+            gameWorld.addEntity(addWall);
+            runGameView.addSprite(
+                    addWall.getId(),
+                    wall.getImageFile(),
+                    addWall.getX(),
+                    addWall.getY(),0
+            );
+        }
+
+
         PlayerTank playerTank = new PlayerTank(
                 Constants.PLAYER_TANK_ID,
                 Constants.PLAYER_TANK_INITIAL_X,
@@ -111,13 +129,23 @@ public class GameDriver {
      */
     private boolean updateGame() {
         // TODO: Implement.
-        ArrayList<Entity> originalEntities = new ArrayList<>(gameWorld.getEntities()); //Dawson
+
+
+        ArrayList<Entity> originalEntities = new ArrayList<>(gameWorld.getEntities());
         for (Entity entity: originalEntities)
         {
             entity.move(gameWorld);
         }
 
-        for (Entity entity: gameWorld.getShells())
+        for (Entity entity:originalEntities)
+        {
+            if (entity instanceof Shell) // check shell object before we cast
+            {
+                //((Shell)entity).checkBounds(gameWorld);
+                //casting to the object because entity contains all types objects. Shell inherits.
+            }
+        }
+        for (Entity entity: gameWorld.getShells()) // add shells
         {
            runGameView.addSprite(
                     entity.getId(),
@@ -126,14 +154,14 @@ public class GameDriver {
                    entity.getY(),
                    entity.getAngle()
            );
-            gameWorld.combineList(); //BORGES
+            gameWorld.combineList();
         }
 
-        if (gameWorld.getShells().size() > 0)// BORGES
+        if (gameWorld.getShells().size() > 0) // clear the shells
         {
-            gameWorld.clearShells();
-
+            gameWorld.clearShells(); 
         }
+
         for (Entity entity: gameWorld.getEntities())
         {
             runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());

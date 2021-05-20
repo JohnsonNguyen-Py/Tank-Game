@@ -55,8 +55,9 @@ public class GameWorld {
     public void clearShells()
     {
         shells.removeAll(shells);
-    }
-    /*public void clearShells() // CLEAR SHELL BORGES
+    } //ANTHONY BORGES HELPED ME OUT. APPROVED BY DAWSON 5/19/2021 OFFICE HOURS
+    
+    /*public void clearShells()
     { RAPID FIRE MODE
         if (shells.size() > 0)
         {
