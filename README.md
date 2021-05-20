@@ -1,7 +1,7 @@
 # CSC 413 Term Project README
 
-Name:
+Name: Johnson Nguyen  
 
-Email:
+Email: Jnguyen63@mail.sfsu.edu  
 
 Extra Features:
