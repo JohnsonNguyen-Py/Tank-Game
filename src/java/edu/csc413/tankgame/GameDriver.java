@@ -173,13 +173,14 @@ public class GameDriver {
 
         for (Entity entity: gameWorld.getOutOfBoundsShells()) // deleting out of bound shells
         {
-            //System.out.println( "testing");
+            System.out.println( "testing");
                 gameWorld.removeEntity(entity.getId());
-            //System.out.println("tseting");
+            System.out.println("tseting");
                 runGameView.removeSprite(entity.getId());
 
 
         }
+
         if(gameWorld.getOutOfBoundsShells().size() > 0)
         {
             gameWorld.clearOOBShells();
