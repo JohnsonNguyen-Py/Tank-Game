@@ -11,12 +11,13 @@ public class GameWorld {
     //       Add whatever instance variables, constructors, and methods are needed.
     private final List<Entity> entities;
     private final List<Entity> shells; //THIS IS FOR THE FIRED SHELLS
+    private final List<Entity> outOfBoundsShells;
 
     public GameWorld() {
         // TODO: Implement.
         entities = new ArrayList<>();
         shells = new ArrayList<>();
-
+        outOfBoundsShells = new ArrayList<>();
     }
 
     /** Returns a list of all entities in the game. */
@@ -25,6 +26,10 @@ public class GameWorld {
         return entities;
     }
 
+    public void addOOBShells(Entity entity) // ADDS OUT OF BOUND SHELLS
+    {
+        outOfBoundsShells.add(entity);
+    }
     public void addNewShells(Entity entity) //I believe this is the correct way.
     {
         shells.add(entity);
@@ -36,9 +41,26 @@ public class GameWorld {
 
     }
 
+    public List<Entity> getOutOfBoundsShells() { // I wanted to use entity entity but then itellij yelled at me
+        return outOfBoundsShells;
+    }
+
+    public void clearOOBShells()
+    {
+        outOfBoundsShells.clear();
+    }
+
+
     /** Returns the Entity with the specified ID. */
     public Entity getEntity(String id) {
         // TODO: Implement.
+        for (Entity findEntity: entities)
+        {
+            if (findEntity.getId() == id)
+            {
+                return findEntity;
+            }
+        }
         return null;
     }
 
@@ -56,21 +78,15 @@ public class GameWorld {
     {
         shells.removeAll(shells);
     } //ANTHONY BORGES HELPED ME OUT. APPROVED BY DAWSON 5/19/2021 OFFICE HOURS
-    
-    /*public void clearShells()
-    { RAPID FIRE MODE
-        if (shells.size() > 0)
-        {
-            for(int elem = 0; elem < shells.size(); elem++)
-            {
-                shells.remove(shells.get(elem));
-            }
-        }
-    }*/
+
 
     /** Removes the entity with the specified ID from the game. */
     public void removeEntity(String id) {
         // TODO: Implement.
+        entities.remove(getEntity(id));
+        //outOfBoundsShells.remove(getOutOfBoundsShells(id));
+
+
 
     }
 }

@@ -8,4 +8,9 @@ public class Wall extends Entity{
     public void move(GameWorld gameWorld)
     {
     }
+
+    @Override
+    public void checkBounds(GameWorld gameWorld) {
+
+    }
 }

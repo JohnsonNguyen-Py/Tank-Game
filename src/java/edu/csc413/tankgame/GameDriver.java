@@ -137,14 +137,23 @@ public class GameDriver {
             entity.move(gameWorld);
         }
 
-        for (Entity entity:originalEntities)
+
+
+
+        /*for (Entity entity:originalEntities)
         {
             if (entity instanceof Shell) // check shell object before we cast
             {
-                //((Shell)entity).checkBounds(gameWorld);
+                ((Shell)entity).checkBounds(gameWorld);
                 //casting to the object because entity contains all types objects. Shell inherits.
+                //System.out.println("Tseting");
+                //runGameView.removeSprite(entity.getId());
+                gameWorld.removeEntity(entity);
+
             }
         }
+
+         */
         for (Entity entity: gameWorld.getShells()) // add shells
         {
            runGameView.addSprite(
@@ -162,34 +171,26 @@ public class GameDriver {
             gameWorld.clearShells(); 
         }
 
+        for (Entity entity: gameWorld.getOutOfBoundsShells()) // deleting out of bound shells
+        {
+            //System.out.println( "testing");
+                gameWorld.removeEntity(entity.getId());
+            //System.out.println("tseting");
+                runGameView.removeSprite(entity.getId());
+
+
+        }
+        if(gameWorld.getOutOfBoundsShells().size() > 0)
+        {
+            gameWorld.clearOOBShells();
+        }
+
         for (Entity entity: gameWorld.getEntities())
         {
             runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
         }
 
-        /* RAPID FIRE POWER UP
-        or (Entity entity: gameWorld.getShells())
-        {
-           runGameView.addSprite(
-                    entity.getId(),
-                   RunGameView.SHELL_IMAGE_FILE,
-                   entity.getX(),
-                   entity.getY(),
-                   entity.getAngle()
-           );
-            gameWorld.combineList(); //BORGES
-        }
 
-        if (gameWorld.getShells().size() > 0)
-        {
-            gameWorld.clearShells();
-
-        }
-        for (Entity entity: gameWorld.getEntities())
-        {
-            runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
-        }
-         */
         return true;
     }
 

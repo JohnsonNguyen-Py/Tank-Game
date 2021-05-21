@@ -14,12 +14,17 @@ public class Shell extends Tank{
 
     }
 
-    /*public void checkBounds(GameWorld gameWorld)
+    @Override
+    public void checkBounds(GameWorld gameWorld)
     {
-        if (getX() < Constants.SHELL_X_LOWER_BOUND ||  getX() > Constants.SHELL_X_UPPER_BOUND || getY() < Constants.SHELL_Y_LOWER_BOUND ||
-                getY() > Constants.SHELL_Y_LOWER_BOUND)
+        if (getX() < Constants.SHELL_X_LOWER_BOUND ||
+                getX() > Constants.SHELL_X_UPPER_BOUND ||
+                getY() < Constants.SHELL_Y_LOWER_BOUND ||
+                getY() > Constants.SHELL_Y_UPPER_BOUND)
         {
-           //remove
+            gameWorld.addOOBShells(gameWorld.getEntity(getId()));
+            System.out.println(getId() + " out of bounds");
+
         }
-    }*/
+    }
 }
