@@ -33,9 +33,12 @@ public class aiTankTwo extends Tank{
             // and right turns, so we build in a small margin of error.
             if (angleDifference < -Math.toRadians(3.0)) {
                 turnRight(Constants.TANK_TURN_SPEED);
+
             } else if (angleDifference > Math.toRadians(3.0)) {
                 turnLeft(Constants.TANK_TURN_SPEED);
+
             }
+            moveForward(Constants.TANK_MOVEMENT_SPEED);
 
 
             fire(gameWorld);
