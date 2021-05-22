@@ -14,6 +14,7 @@ public class Wall extends Entity{
     @Override
     public void move(GameWorld gameWorld)
     {
+
     }
 
     @Override
