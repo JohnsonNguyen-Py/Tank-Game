@@ -38,6 +38,9 @@ public abstract class Entity {
     public double getAngle() {
         return angle;
     }
+
+    protected double getXBound;
+    protected double getYBound;
     /** All entities can move, even if the details of their move logic may vary based on the specific type of Entity. */
     public abstract void move(GameWorld gameWorld);
     public abstract void checkBounds(GameWorld gameWorld);

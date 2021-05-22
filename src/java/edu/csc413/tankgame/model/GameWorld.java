@@ -1,5 +1,7 @@
 package edu.csc413.tankgame.model;
 
+import edu.csc413.tankgame.Constants;
+
 import java.util.*;
 
 /**
@@ -13,6 +15,7 @@ public class GameWorld {
     private final List<Entity> shells; //THIS IS FOR THE FIRED SHELLS
     private final List<Entity> outOfBoundsShells;
 
+
     public GameWorld() {
         // TODO: Implement.
         entities = new ArrayList<>();
@@ -25,6 +28,7 @@ public class GameWorld {
         // TODO: Implement.
         return entities;
     }
+
 
     public void addOOBShells(Entity entity) // ADDS OUT OF BOUND SHELLS
     {
@@ -51,12 +55,13 @@ public class GameWorld {
     }
 
 
-    /** Returns the Entity with the specified ID. */
+    /** Returns the Entity with the specified ID.
+     * @param id*/
     public Entity getEntity(String id) {
         // TODO: Implement.
         for (Entity findEntity: entities)
         {
-            if (findEntity.getId() == id)
+            if (findEntity.getId() ==id)
             {
                 return findEntity;
             }

@@ -10,6 +10,7 @@ public abstract class Tank extends Entity {
 
     private int shellCounter = 0; // makes each shell unique
     private int shotCD = 0; //SHOOT COOLDOWN
+    private int tankHealth = 5;
 
     public Tank(String id, double x, double y, double angle) {
         super(id, x, y, angle);
@@ -20,6 +21,25 @@ public abstract class Tank extends Entity {
     // The following methods will be useful for determining where a shell should be spawned when it
     // is created by this tank. It needs a slight offset so it appears from the front of the tank,
     // even if the tank is rotated. The shell should have the same angle as the tank.
+
+    //HP stuff
+    public void minusHP()
+    {
+     tankHealth -= 1;
+      //System.out.println(getId() + "TESTING LOST HP");
+    }
+
+    public boolean tankDead()
+    {
+        if (tankHealth > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     //SHELLS
     protected void shellCoolDown(GameWorld gameWorld)
@@ -52,6 +72,7 @@ public abstract class Tank extends Entity {
     }
 
 
+
     //MOVEMENTS
     protected void moveForward(double movementSpeed) {
         setX(getX() + movementSpeed * Math.cos(getAngle()));
@@ -70,6 +91,30 @@ public abstract class Tank extends Entity {
     protected void turnRight(double turnSpeed) {
         setAngle(getAngle() + turnSpeed);
     }
+
+    public void checkBoundsTank(GameWorld gameWorld) {
+        // I checked bounds here for tank because I want to reuse it for the others as well.
+        // If i were to do it inside player tank, i would've just copied and paste to the AI tanks.
+        // the following instructions were on the hand out!
+
+                if(getX() < Constants.TANK_X_LOWER_BOUND) {
+                    //System.out.println("Testing tank bounds");
+                    gameWorld.getEntity(getId()).setX(Constants.TANK_X_LOWER_BOUND);
+
+                }
+                if(getX() > Constants.TANK_X_UPPER_BOUND) {
+                    gameWorld.getEntity(getId()).setX(Constants.TANK_X_UPPER_BOUND);
+                }
+                if(getY() < Constants.TANK_Y_LOWER_BOUND)
+                {
+                    gameWorld.getEntity(getId()).setY(Constants.TANK_Y_LOWER_BOUND);
+                }
+                if(getY()> Constants.TANK_Y_UPPER_BOUND)
+                {
+                    gameWorld.getEntity(getId()).setY(Constants.TANK_Y_UPPER_BOUND);
+                }
+    }
+
 
 
 

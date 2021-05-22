@@ -33,7 +33,7 @@ public class PlayerTank extends Tank{
 
     @Override
     public void checkBounds(GameWorld gameWorld) {
-
+        checkBoundsTank(gameWorld);
     }
 
 }

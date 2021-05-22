@@ -3,6 +3,7 @@ package edu.csc413.tankgame;
 import edu.csc413.tankgame.model.*;
 import edu.csc413.tankgame.view.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,23 +138,6 @@ public class GameDriver {
             entity.move(gameWorld);
         }
 
-
-
-
-        /*for (Entity entity:originalEntities)
-        {
-            if (entity instanceof Shell) // check shell object before we cast
-            {
-                ((Shell)entity).checkBounds(gameWorld);
-                //casting to the object because entity contains all types objects. Shell inherits.
-                //System.out.println("Tseting");
-                //runGameView.removeSprite(entity.getId());
-                gameWorld.removeEntity(entity);
-
-            }
-        }
-
-         */
         for (Entity entity: gameWorld.getShells()) // add shells
         {
            runGameView.addSprite(
@@ -173,11 +157,16 @@ public class GameDriver {
 
         for (Entity entity: gameWorld.getOutOfBoundsShells()) // deleting out of bound shells
         {
-            System.out.println( "testing");
-                gameWorld.removeEntity(entity.getId());
-            System.out.println("tseting");
-                runGameView.removeSprite(entity.getId());
-
+            //System.out.println( "testing");
+                gameWorld.removeEntity(entity.getId()); // DELETES SHELL ID
+           // System.out.println("tseting");
+                runGameView.removeSprite(entity.getId()); // DELETES SPRITE
+                runGameView.addAnimation(
+                RunGameView.BIG_EXPLOSION_ANIMATION,
+                RunGameView.BIG_EXPLOSION_FRAME_DELAY,
+                entity.getX(),
+                entity.getY()); // HOLY CRAP IT WORKS NOW AKJSDKAHLSDA WOOWOWOWOWO LETS GOOOOO
+                                // also thank you dawson for this idea in the hand out. :)
 
         }
 
@@ -185,12 +174,20 @@ public class GameDriver {
         {
             gameWorld.clearOOBShells();
         }
+        for (Entity entity: gameWorld.getEntities()) // I tried to do it this way for Shell's but then it did not work
+        {
+
+            entity.checkBounds(gameWorld); // THIS CALLS THE CHECKBOUNDS FOR THE TANK. CANNOT PUT SHELL STUFF HERE.
+
+
+        }
+
+
 
         for (Entity entity: gameWorld.getEntities())
         {
             runGameView.setSpriteLocationAndAngle(entity.getId(), entity.getX(), entity.getY(), entity.getAngle());
         }
-
 
         return true;
     }

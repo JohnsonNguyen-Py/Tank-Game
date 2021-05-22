@@ -23,7 +23,7 @@ public class Shell extends Tank{
                 getY() > Constants.SHELL_Y_UPPER_BOUND)
         {
             gameWorld.addOOBShells(gameWorld.getEntity(getId()));
-            System.out.println(getId() + " out of bounds");
+            //System.out.println(getId() + " out of bounds");
 
         }
     }
