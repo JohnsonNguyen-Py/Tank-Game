@@ -52,7 +52,7 @@ public abstract class Tank extends Entity {
             gameWorld.addNewShells(shell); //SHELL COUNTER. ANTHONY BORGES HELPED ME OUT. APPROVED BY DAWSON 5/18/2021
 
             shellCounter++;
-            shotCD = 10;
+            shotCD = 80;
         }
 
     }
@@ -115,7 +115,14 @@ public abstract class Tank extends Entity {
                 }
     }
 
+    @Override
+    public double getXBound()
+    {
+        return getX();
+    }
 
-
-
+    @Override
+    public double getYBound(){
+        return getY();
+    }
 }

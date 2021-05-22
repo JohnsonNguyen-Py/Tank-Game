@@ -27,4 +27,14 @@ public class Shell extends Tank{
 
         }
     }
+
+
+    @Override
+    public double getXBound(){
+        return getX() + Constants.SHELL_WIDTH;
+    }
+    @Override
+    public double getYBound(){
+        return getY() + Constants.SHELL_HEIGHT;
+    }
 }

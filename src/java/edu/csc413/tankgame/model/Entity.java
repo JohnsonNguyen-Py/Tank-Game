@@ -39,10 +39,15 @@ public abstract class Entity {
         return angle;
     }
 
-    protected double getXBound;
-    protected double getYBound;
+
+
+
+
+    public abstract double getXBound(); // COLLISION Advised by Dawson in handout
+    public abstract double getYBound(); // COLLISION Advised by Dawson in handout
     /** All entities can move, even if the details of their move logic may vary based on the specific type of Entity. */
     public abstract void move(GameWorld gameWorld);
     public abstract void checkBounds(GameWorld gameWorld);
+
 
 }

@@ -2,6 +2,7 @@ package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.Constants;
 import edu.csc413.tankgame.KeyboardReader;
+import edu.csc413.tankgame.view.RunGameView;
 
 public class PlayerTank extends Tank{
 
@@ -29,6 +30,7 @@ public class PlayerTank extends Tank{
             fire(gameWorld);
             //shellCooldown();
         }
+
     }
 
     @Override
@@ -36,4 +38,14 @@ public class PlayerTank extends Tank{
         checkBoundsTank(gameWorld);
     }
 
+
+
+    @Override
+    public double getXBound(){
+        return getX() + Constants.TANK_X_UPPER_BOUND;
+    }
+    @Override
+    public double getYBound(){
+        return getY() + Constants.TANK_Y_LOWER_BOUND;
+    }
 }

@@ -167,7 +167,6 @@ public class GameDriver {
                 entity.getX(),
                 entity.getY()); // HOLY CRAP IT WORKS NOW AKJSDKAHLSDA WOOWOWOWOWO LETS GOOOOO
                                 // also thank you dawson for this idea in the hand out. :)
-
         }
 
         if(gameWorld.getOutOfBoundsShells().size() > 0)
@@ -178,11 +177,17 @@ public class GameDriver {
         {
 
             entity.checkBounds(gameWorld); // THIS CALLS THE CHECKBOUNDS FOR THE TANK. CANNOT PUT SHELL STUFF HERE.
-
-
         }
 
+        for (Entity entity: gameWorld.getEntities())
+        {
+            if(gameWorld.entitiesOverlap(entity,entity)){
+                System.out.println(entity.getId() + " is colliding with " + entity.getId());
 
+
+
+            }
+        }
 
         for (Entity entity: gameWorld.getEntities())
         {
@@ -190,7 +195,13 @@ public class GameDriver {
         }
 
         return true;
+
     }
+
+
+
+
+
 
     /**
      * resetGame is called at the end of the game once the gameplay loop exits. This should clear any existing data from

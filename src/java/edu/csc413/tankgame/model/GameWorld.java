@@ -89,9 +89,70 @@ public class GameWorld {
     public void removeEntity(String id) {
         // TODO: Implement.
         entities.remove(getEntity(id));
-        //outOfBoundsShells.remove(getOutOfBoundsShells(id));
-
-
-
+        //outOfBoundsShells.remove(getOutOfBoundsShells());
     }
+    /*● First entity’s x coordinate < second entity’s x bound AND
+   ●  First entity’s x bound > second entity’s x coordinate AND
+   ● First entity’s y coordinate < second entity’s y bound AND
+   ● First entity’s y bound > second entity’s y coordinate.*/ //THIS IS FROM HAND OUT
+    public boolean entitiesOverlap(Entity entity1, Entity entity2) { //LECTURE
+        return entity1.getX() < entity2.getXBound()
+                && entity1.getXBound() > entity2.getX()
+                && entity1.getY() < entity2.getYBound()
+                && entity1.getYBound() > entity2.getY();
+    }
+     /*Calculate each of these four distances. The shortest of these four distances determines how we
+    then adjust the two tanks:
+    1. If tankA.getXBound() - tankB.getX() is the smallest distance, then we move Tank A
+    to the left by half that distance and Tank B to the right by half that distance.
+    2. If tankB.getXBound() - tankA.getX() is the smallest distance, then we move Tank A
+    to the right by half that distance and Tank B to the left by half that distance.
+    3. If tankA.getYBound() - tankB.getY() is the smallest distance, then we move Tank A
+    upward by half that distance and Tank B downward by half that distance.
+    4. If tankB.getYBound() - tankA.getY() is the smallest distance, then we move Tank A
+    downward by half that distance and Tank B upward by half that distance.
+    */
+
+
+    private void handleCollision(Entity entity1, Entity entity2) {
+
+        double collNum1x = entity1.getXBound()-entity2.getX();
+        double collNum2x = entity2.getXBound()-entity1.getX();
+        double collNum3y = entity1.getYBound()-entity2.getY();
+        double collNum4y = entity2.getYBound()-entity1.getY();
+
+
+
+        if (entity1 instanceof Tank && entity2 instanceof Tank) {
+            if(entitiesOverlap(entity1,entity2)){
+                entity1.setX(entity1.getX()-(collNum1x/2));
+                entity2.setX(entity2.getX()+(collNum2x/2));}
+            else if (entitiesOverlap(entity1,entity2))
+            {
+                entity1.setX(entity1.getX()+(collNum1x/2));
+                entity2.setX(entity2.getX()-(collNum2x/2));
+            }
+            else if (entitiesOverlap(entity1,entity2))
+            {
+                entity1.setX(entity1.getY()+(collNum3y/2));
+                entity2.setX(entity2.getY()-(collNum4y/2));
+            }
+            else if (entitiesOverlap(entity1,entity2))
+            {
+                entity1.setX(entity1.getY()-(collNum3y/2));
+                entity2.setX(entity2.getY()+(collNum4y/2));
+            }
+
+
+        } else if (entity1 instanceof Tank && entity2 instanceof Shell) {
+
+
+        } else if (entity1 instanceof Shell && entity2 instanceof Tank) {
+
+        }else if (entity1 instanceof Wall && entity2 instanceof Shell) {
+
+        }
+    }
+
+
 }
