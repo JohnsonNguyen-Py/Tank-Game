@@ -5,3 +5,4 @@ Name: Johnson Nguyen
 Email: Jnguyen63@mail.sfsu.edu  
 
 Extra Features:
+Shell Explosion when it hit bounds.
