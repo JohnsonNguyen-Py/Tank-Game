@@ -49,6 +49,21 @@ public class DumbAiTank extends Tank {
         checkBoundsTank(gameWorld);
     }
 
+    @Override
+    public void handleCollision(GameWorld gameWorld) {
+            handleCollision(gameWorld);
+        gameWorld.addcollideShells(gameWorld.getEntity(getId()));
+    }
+
+    @Override
+    public double getXBound(){
+        return getX() + Constants.TANK_WIDTH;
+    }
+    @Override
+    public double getYBound(){
+        return getY() + Constants.TANK_HEIGHT;
+    }
+
 }
 
 

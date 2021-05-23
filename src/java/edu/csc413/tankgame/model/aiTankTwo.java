@@ -35,10 +35,10 @@ public class aiTankTwo extends Tank{
                 turnRight(Constants.TANK_TURN_SPEED);
 
             } else if (angleDifference > Math.toRadians(3.0)) {
-                turnLeft(Constants.TANK_TURN_SPEED);
+                turnLeft(Constants.TANK_TURN_SPEED );
 
             }
-            moveForward(Constants.TANK_MOVEMENT_SPEED);
+            moveForward(Constants.TANK_MOVEMENT_SPEED-3);
 
 
             fire(gameWorld);
@@ -50,6 +50,21 @@ public class aiTankTwo extends Tank{
         checkBoundsTank(gameWorld);
     }
 
+    @Override
+    public void handleCollision(GameWorld gameWorld) {
+            handleCollision(gameWorld);
+        gameWorld.addcollideShells(gameWorld.getEntity(getId()));
+    }
 
+    @Override
+    public double getXBound(){
+        return getX() + Constants.TANK_WIDTH;
+    }
+    @Override
+    public double getYBound(){
+        return getY() + Constants.TANK_HEIGHT;
+    }
 
 }
+
+

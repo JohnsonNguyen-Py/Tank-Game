@@ -22,6 +22,12 @@ public class Wall extends Entity{
 
     }
 
+    @Override
+    public void handleCollision(GameWorld gameWorld) {
+        handleCollision(gameWorld);
+
+        gameWorld.addcollideShells(gameWorld.getEntity(getId()));
+    }
 
 
     @Override

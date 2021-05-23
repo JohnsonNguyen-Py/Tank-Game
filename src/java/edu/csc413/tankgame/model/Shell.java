@@ -28,6 +28,13 @@ public class Shell extends Tank{
         }
     }
 
+    @Override
+    public void handleCollision(GameWorld gameWorld) {
+        handleCollision(gameWorld);
+        gameWorld.addcollideShells(gameWorld.getEntity(getId()));
+
+    }
+
 
     @Override
     public double getXBound(){

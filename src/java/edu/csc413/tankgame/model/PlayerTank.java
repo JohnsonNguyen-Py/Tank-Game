@@ -31,6 +31,7 @@ public class PlayerTank extends Tank{
             //shellCooldown();
         }
 
+
     }
 
     @Override
@@ -38,14 +39,19 @@ public class PlayerTank extends Tank{
         checkBoundsTank(gameWorld);
     }
 
+    @Override
+    public void handleCollision(GameWorld gameWorld) {
+        handleCollision(gameWorld);
+        gameWorld.addcollideTank(gameWorld.getEntity(getId()));
+    }
 
 
     @Override
     public double getXBound(){
-        return getX() + Constants.TANK_X_UPPER_BOUND;
+        return getX() + Constants.TANK_WIDTH;
     }
     @Override
     public double getYBound(){
-        return getY() + Constants.TANK_Y_LOWER_BOUND;
+        return getY() + Constants.TANK_HEIGHT;
     }
 }
