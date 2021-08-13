@@ -1,8 +1,8 @@
-# CSC 413 Term Project README
+# 413 Term Project README
 
 Name: Johnson Nguyen  
 
-Email: Jnguyen63@mail.sfsu.edu  
+Email: 
 
 Extra Features:
 Shell Explosion when it hit bounds.
